@@ -10,24 +10,26 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
-        /*
-         *Authentication authentication
-         *인증 정보가 담겨 있는 객체
-         */
+    /**
+     * Authentication authentication
+     * - 인증 정보가 담겨 있는 객체
+     *
+     */
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 
         HttpSession session = request.getSession();
-        RequestLogin requestLogin = (RequestLogin) session.gtetAttribute("requestLogin");
-        form = Object.requireNollElseGet(form, RequestLogin::new );
+        RequestLogin form = (RequestLogin) session.getAttribute("requestLogin");
+        form = Objects.requireNonNullElseGet(form, RequestLogin::new);
+
         String redirectUrl = form.getRedirectUrl();
         String url = StringUtils.hasText(redirectUrl) ? redirectUrl : "/";
 
-        session.removeAttribute(request.getContextPath());
+        session.removeAttribute("requestLogin");
 
-        response.sendRedirect(request.getContextPath()+url);
-
+        response.sendRedirect(request.getContextPath() + url);
     }
 }

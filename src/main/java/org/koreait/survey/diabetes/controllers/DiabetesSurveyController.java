@@ -6,6 +6,7 @@ import org.flywaydb.core.api.callback.Error;
 import org.koreait.global.constants.Gender;
 import org.koreait.global.libs.Utils;
 import org.koreait.survey.diabetes.constamts.SmokingHistory;
+import org.koreait.survey.diabetes.validators.DiabetesSurveyValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -21,6 +22,7 @@ import java.util.List;
 @SessionAttributes("requestDiabetesSurvey")
 public class DiabetesSurveyController {
     private  Utils utils;
+    private  DiabetesSurveyValidator validator;
 
     @ModelAttribute("addCss")
     public List<String> addCss(){
@@ -53,6 +55,7 @@ public class DiabetesSurveyController {
     @GetMapping("/step2")
     public String step2 (RequestDiabetesSurvey form , Error errors, Model model){
         commonProcess("step",model);
+        validator.validate(form, errors);
         if (errors.hasErrors()){
             return utils.tpl("survey/diabetes/step1");
         }
