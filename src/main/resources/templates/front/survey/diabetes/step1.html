@@ -39,6 +39,21 @@
                 <div class="error" th:each="err :${#fields.errors('hypertension'}" th:text="${err}"></div>
             </dd>
         </dl>
+        <dl>
+            <dt th:text="#{심장 질환 여부}"></dt>
+            <dd>
+                <span>
+                    <input type="radio" name="hearDisease" value="true" th:field="*{hearDisease}" id="hearDisease-true">
+                    <label for="hearDisease-true" th:text="#{있음}"></label>
+                </span>
+                <span>
+                    <input type="radio" name="hearDisease" value="true" th:field="*{hearDisease}" id="hearDisease-false">
+                    <label for="hearDisease-false" th:text="#{없음}"></label>
+                </span>
+                <div class="error" th:each="err :${#fields.errors('hearDisease'}" th:text="${err}"></div>
+            </dd>
+
+        </dl>
     </form>
 </main>
 </html>
