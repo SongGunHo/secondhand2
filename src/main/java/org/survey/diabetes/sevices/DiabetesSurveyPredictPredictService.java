@@ -72,6 +72,25 @@ public class DiabetesSurveyPredictPredictService {
         return result.isEmpty() &&  result.getFirst() == 1;
     }
 
+    public boolean isDiabetes(RequestDiabetesSurvey form){
+        List<Number> item = new ArrayList<>();
+        item.add(form.getGender().getNum());
+        item.add(form.getAge());
+        item.add(form.isHypertension() ? 1:0);
+        item.add(form.isHeartDisease() ? 1 :0);
+        item.add(form.getSmokingHistory().getNum());
+
+        // bmi  지수
+        double height = form.getHeight()/100.0;
+        double weight = form.getWeight();
+        double bmi = Math.round((weight/ Math.pow(height, 2))* 100.0)/100.0;
+        item.add(bmi);
+        item.add(form.getHbA1c());// 당화혈 색소 수치
+        item.add(form.getBloodGlucoseLevel());// 혈당 수치
+        System.out.println(item);
+        return isDiabetes(item);
+    }
+
 
 
 }
