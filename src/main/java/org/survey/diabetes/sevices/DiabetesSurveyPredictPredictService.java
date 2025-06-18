@@ -1,5 +1,7 @@
 package org.survey.diabetes.sevices;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.koreait.global.configs.PythonProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -9,6 +11,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Lazy
 @Service
@@ -17,6 +20,8 @@ import java.util.List;
 public class DiabetesSurveyPredictPredictService {
     private final PythonProperties properties;
     private final WebApplicationContext ctx;
+    private final ObjectMapper om;
+
 
     public List<Integer> process(List<List<Number>> items){
 
@@ -31,8 +36,32 @@ public class DiabetesSurveyPredictPredictService {
             pythonPath = properties.getBase2() + "/python.exe";
         }
 
+        try {
+            ProcessBuilder builder = isProduction ? new ProcessBuilder("/bin/sh", activationCommand) : new ProcessBuilder(activationCommand); // 가상환경 활성화
+            Process process = builder.start();
+            if (process.waitFor() == 0) { // 정상 수행된 경우
+                String data  = om.writeValueAsString(items);
+                builder = new ProcessBuilder(pythonPath, properties.getRestaurant() + "/diabetes/predict.py", data);
+                process = builder.start();
+                int statusCode = process.waitFor();
+                if (statusCode == 0) {
+                    String json = process.inputReader().lines().collect(Collectors.joining());
+                    return om.readValue(json, new TypeReference<>() {});
 
-        return null;
+
+                } else {
+                    System.out.println("statusCode:" + statusCode);
+                    process.errorReader().lines().forEach(System.out::println);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+        return List.of();
     }
 
 
