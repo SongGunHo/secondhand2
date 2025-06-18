@@ -1,5 +1,6 @@
 package org.koreait.survey.diabetes.controllers;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.flywaydb.core.api.callback.Error;
 import org.koreait.global.constants.Gender;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 import javax.imageio.stream.ImageOutputStreamImpl;
 import java.util.List;
@@ -37,8 +39,11 @@ public class DiabetesSurveyController {
 
     @ModelAttribute("requestDiabetesSurvey")
     public RequestDiabetesSurvey requestDiabetesSurvey(){
+        RequestDiabetesSurvey form = new RequestDiabetesSurvey();
+        form.setGender(Gender.FEMALE);
+        form.setSmokingHistory(SmokingHistory.CURRENT);
+        return form;
 
-        return new RequestDiabetesSurvey();
     }
     @GetMapping("/step1")
     public String step1(@ModelAttribute RequestDiabetesSurvey form, Model model){
@@ -55,12 +60,14 @@ public class DiabetesSurveyController {
     }
 
     @PostMapping("/process")
-    public String process(@Valid RequestDiabetesSurvey form , Errors errors ,Model model){
+    public String process(@Valid RequestDiabetesSurvey form , Errors errors , Model model, SessionStatus status){
         commonProcess("step", model);
 
         if(errors.hasErrors()){
             return utils.tpl("survey/diabetes/step2");
         }
+        //처리 완료후 세션 값으로 더이상 변경 되지 않는다
+        status.setComplete();
         return "redirect:/survey/diabetes/result/설문 번호";
     }
 

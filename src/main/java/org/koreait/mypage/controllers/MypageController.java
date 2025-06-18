@@ -1,6 +1,5 @@
 package org.koreait.mypage.controllers;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.koreait.global.libs.Utils;
 import org.springframework.stereotype.Controller;
@@ -11,20 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/mypage")
 @RequiredArgsConstructor
 public class MypageController {
-
-    private Utils utils;
+    private final Utils utils;
 
     @GetMapping
-    public String index(){
+    public String index() {
         return utils.tpl("mypage/index");
     }
-
-
-
-
-
-
-
-
-
 }
