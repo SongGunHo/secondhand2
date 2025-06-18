@@ -24,4 +24,10 @@ public class DiabetesSurveyValidator implements Validator {
 
         }
     }
+    private void validatorStep1(RequestDiabetesSurvey form, Errors errors){
+
+    }
+    private void validatorStep2(RequestDiabetesSurvey form, Errors errors){
+
+    }
 }
