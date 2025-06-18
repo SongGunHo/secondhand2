@@ -2,7 +2,9 @@ package org.koreait.survey.diabetes.controllers;
 
 import jakarta.validation.Valid;
 import org.flywaydb.core.api.callback.Error;
+import org.koreait.global.constants.Gender;
 import org.koreait.global.libs.Utils;
+import org.koreait.survey.diabetes.constamts.SmokingHistory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -22,7 +24,14 @@ public class DiabetesSurveyController {
     public List<String> addCss(){
         return List.of("survey/diabetes/style");
     }
-
+    @ModelAttribute("gender")
+    public Gender[] gender(){
+        return Gender.values();
+    }
+    @ModelAttribute("smokingHistory")
+    public SmokingHistory[] smokingHistory(){
+        return SmokingHistory.values();
+    }
 
 
 

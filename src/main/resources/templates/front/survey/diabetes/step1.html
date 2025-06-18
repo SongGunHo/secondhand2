@@ -6,6 +6,9 @@
 
 <main layout:fragment="content">
     <h1 th:test="${pageTitle}"></h1>
-    <form name="frmStep" th:action="@{/survey/diabetes/step2}" method="post"></form>
+    <form name="frmStep" th:action="@{/survey/diabetes/step2}" method="post" th:objdect="${requestDiabetesSurvey}">
+        <div class="error global" th:each="err: ${#fields.globalErrors}" ></div>
+
+    </form>
 </main>
 </html>
