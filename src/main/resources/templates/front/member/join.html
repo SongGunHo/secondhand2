@@ -17,7 +17,6 @@
                    <div class="error" th:each="err : ${#fields.errors('password')}" th:text="${err}"></div>
                </li>
                <li>
-                   <div class=" left"></div>
                    <input type="password" name="confirmPassword" th:field="*{confirmPassword}" th:placeholder="#{비밀번호_확인}">
                    <div class="error" th:each="err : ${#fields.errors('confirmPassword')}" th:text="${err}"></div>
                </li>

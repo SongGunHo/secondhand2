@@ -6,6 +6,7 @@ import org.flywaydb.core.api.callback.Error;
 import org.koreait.global.constants.Gender;
 import org.koreait.global.libs.Utils;
 import org.koreait.survey.diabetes.constamts.SmokingHistory;
+import org.koreait.survey.diabetes.sevices.DiabetesSurveyService;
 import org.koreait.survey.diabetes.validators.DiabetesSurveyValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,7 @@ import java.util.List;
 public class DiabetesSurveyController {
     private  Utils utils;
     private  DiabetesSurveyValidator validator;
+    private DiabetesSurveyService service;
 
     @ModelAttribute("addCss")
     public List<String> addCss(){
@@ -69,6 +71,8 @@ public class DiabetesSurveyController {
         if(errors.hasErrors()){
             return utils.tpl("survey/diabetes/step2");
         }
+        //  설문 결과밎 저장 처리
+        service.process(form);
         //처리 완료후 세션 값으로 더이상 변경 되지 않는다
         status.setComplete();
         return "redirect:/survey/diabetes/result/설문 번호";
