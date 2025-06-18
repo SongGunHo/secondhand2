@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.koreait.global.configs.PythonProperties;
+import org.modelmapper.internal.bytebuddy.asm.MemberSubstitution;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -62,6 +63,11 @@ public class DiabetesSurveyPredictPredictService {
 
 
         return List.of();
+    }
+
+    public boolean isDiabetes(List<Number> items){
+        List<Integer> result = process(List.of(items));
+        return result.isEmpty() &&  result.getFirst() == 1;
     }
 
 

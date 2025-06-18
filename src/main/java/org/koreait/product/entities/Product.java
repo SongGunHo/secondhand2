@@ -1,7 +1,6 @@
 package org.koreait.product.entities;
 
 import lombok.Data;
-import org.koreait.global.entities.BaseEntity;
 import org.koreait.product.constants.ProductStatus;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;

@@ -1,7 +1,6 @@
 package org.koreait.file.entities;
 
 import lombok.Data;
-import org.koreait.global.entities.BaseEntity;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;

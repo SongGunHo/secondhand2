@@ -1,7 +1,7 @@
 package org.koreait.admin.trend.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.koreait.admin.global.controllers.CommonController;
+import org.koreait.admin.global.controllers.CommonController1;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -15,7 +15,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/admin/trend")
-public class TrendController extends CommonController {
+public class TrendController extends CommonController1 {
 
     @Override
     @ModelAttribute("mainCode")
