@@ -1,12 +1,24 @@
 package org.survey.diabetes.constamts;
 
 public enum SmokingHistory {
-    No_Info, // 정보 없음
-    CURRENT, // 현재 흡연중
-    EVER, // 항상
-    FORMER, // 과거 흡연했지만 지금은 안함
-    NEVER ,// 흡연을 한적이 없음
-    NOT_CURRENT // 현재는 아니지만 흡연 예정
+    No_Info(0), // 정보 없음
+    CURRENT(1), // 현재 흡연중
+    EVER(2), // 항상
+    FORMER(3), // 과거 흡연했지만 지금은 안함
+    NEVER (4),// 흡연을 한적이 없음
+    NOT_CURRENT(5); // 현재는 아니지만 흡연 예정
+
+    private final int num;
+
+
+    SmokingHistory(int num){
+        this.num = num;
+    }
+
+    public int getNum(){
+        return null;
+    }
+
 
 
 }
