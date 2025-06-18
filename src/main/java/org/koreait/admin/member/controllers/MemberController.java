@@ -1,7 +1,8 @@
 package org.koreait.admin.member.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.koreait.admin.global.controllers.CommonController1;
+import org.koreait.admin.global.controllers.CommonController;
+import org.koreait.admin.global.controllers.CommonController;
 import org.koreait.global.search.ListData;
 import org.koreait.member.constants.Authority;
 import org.koreait.member.controllers.MemberSearch;
@@ -21,7 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/admin/member")
 @Controller("adminMemberController")
-public class MemberController extends CommonController1 {
+public class MemberController extends CommonController {
 
     private final MemberInfoService infoService;
     private final MemberUpdateService updateService;

@@ -21,7 +21,7 @@ public class MemberAuthenitcaionExceptionHandker implements AuthenticationEntryP
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         String URL  = request.getRequestURI();
         String qs = request.getQueryString();
-        URL = StringUtils.hasText(qs) ? URL + "?" + URLEncoder(qs, "UTF-8") : URL;
+//        URL = StringUtils.hasText(qs) ? URL + "?" + URLEncoder(qs, "UTF-8") : URL;
 
         response.sendRedirect(String.format("%s/member/login?redirectUrl=%s", request.getContextPath() , URL));
 

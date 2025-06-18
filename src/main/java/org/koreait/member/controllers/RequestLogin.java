@@ -10,9 +10,6 @@ public class RequestLogin {
     private String password;
     private boolean autoLogin;
     private String redirectUrl;
-    private List<String> fieldErrors; // 필드 명_ 에러 코드
+    private List<String> fieldErrors; // 필드명_에러코드
     private List<String> globalErrors;
-
-
-
 }
