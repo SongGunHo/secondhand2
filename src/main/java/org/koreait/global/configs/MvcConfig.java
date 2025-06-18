@@ -6,7 +6,6 @@ import org.springframework.data.jdbc.repository.config.EnableJdbcAuditing;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration

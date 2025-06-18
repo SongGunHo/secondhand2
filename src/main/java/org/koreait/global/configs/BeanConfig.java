@@ -12,25 +12,18 @@ import org.springframework.context.annotation.Lazy;
 public class BeanConfig {
     @Lazy
     @Bean
-    public org.koreait.global.configs.ModelMapper modelMapper() {
+    public ModelMapper modelMapper() {
         ModelMapper mapper = new ModelMapper();
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
         return mapper;
     }
 
-
     @Lazy
     @Bean
-    public ObjectMapper objectMapper(){
+    public ObjectMapper objectMapper() {
         ObjectMapper om = new ObjectMapper();
-
-        om.registerModule(new JavaTimeModule()); // java.time 패키지
-
+        om.registerModule(new JavaTimeModule()); // java.time 패키지 대응
         return om;
     }
-
-
-
-
 }

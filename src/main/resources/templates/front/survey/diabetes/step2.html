@@ -5,6 +5,18 @@
 
 
 <main layout:fragment="content">
-
+    <h1 th:test="${pageTitle}"></h1>
+    <form name="frmStep" th:action="@{/survey/diabetes/step2}" method="post" th:objdect="${requestDiabetesSurvey}">
+        <div class="error global" th:each="err: ${#fields.globalErrors}" ></div>
+        <dl>
+            <dt th:text="#{키 몸무게}"></dt>
+            <dd>
+                <input type="number" name="height" th:field="*{height}" min="50" max="350">cm/
+                <input type="number" name="weight" th:field="*{weight}" min="10" max="450">kg
+                <div class="error" th:each="err :${#fields.errors('height'}" th:text="${err}"></div>
+                <div class="error" th:each="err :${#fields.errors('weight'}" th:text="${err}"></div>
+            </dd>
+        </dl>
+    </form>
 </main>
 </html>
