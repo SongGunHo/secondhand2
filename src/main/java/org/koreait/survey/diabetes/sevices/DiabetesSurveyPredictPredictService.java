@@ -1,15 +1,14 @@
-package org.survey.diabetes.sevices;
+package org.koreait.survey.diabetes.sevices;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.koreait.global.configs.PythonProperties;
-import org.modelmapper.internal.bytebuddy.asm.MemberSubstitution;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
-import org.survey.diabetes.controllers.RequestDiabetesSurvey;
+import org.koreait.survey.diabetes.controllers.RequestDiabetesSurvey;
 
 import java.util.ArrayList;
 import java.util.Arrays;

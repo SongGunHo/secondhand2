@@ -7,11 +7,9 @@ import org.koreait.global.constants.Gender;
 import org.koreait.member.entities.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Lazy;
-import org.survey.diabetes.constamts.SmokingHistory;
-import org.survey.diabetes.controllers.RequestDiabetesSurvey;
+import org.koreait.survey.diabetes.constamts.SmokingHistory;
+import org.koreait.survey.diabetes.controllers.RequestDiabetesSurvey;
 
-import java.lang.reflect.Type;
 import java.util.List;
 
 @SpringBootTest

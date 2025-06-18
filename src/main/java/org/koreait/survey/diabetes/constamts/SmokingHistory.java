@@ -1,4 +1,4 @@
-package org.survey.diabetes.constamts;
+package org.koreait.survey.diabetes.constamts;
 
 public enum SmokingHistory {
     No_Info(0), // 정보 없음

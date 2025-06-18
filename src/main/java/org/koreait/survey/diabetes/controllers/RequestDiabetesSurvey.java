@@ -1,9 +1,8 @@
-package org.survey.diabetes.controllers;
+package org.koreait.survey.diabetes.controllers;
 
 import lombok.Data;
 import org.koreait.global.constants.Gender;
-import org.springframework.stereotype.Controller;
-import org.survey.diabetes.constamts.SmokingHistory;
+import org.koreait.survey.diabetes.constamts.SmokingHistory;
 
 @Data
 public class RequestDiabetesSurvey {

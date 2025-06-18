@@ -1,4 +1,4 @@
-package org.survey.diabetes.controllers;
+package org.koreait.survey.diabetes.controllers;
 
 import jakarta.validation.Valid;
 import org.flywaydb.core.api.callback.Error;
