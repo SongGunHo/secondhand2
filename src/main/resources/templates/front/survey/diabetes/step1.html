@@ -52,7 +52,15 @@
                 </span>
                 <div class="error" th:each="err :${#fields.errors('hearDisease'}" th:text="${err}"></div>
             </dd>
-
+        </dl>
+        <dl>
+            <dt th:text="#{흡연 여부}"></dt>
+                <dd>
+                    <span th:each="item : ${#somkingHistories}" th:if="${item.name() !='NOT_INFO'}">
+                        <input type="radio" name="smokingHistory" th:value="${item.name()}" th:field="*{smokingHistory}" th:id="${'smokingHistory-'+ item.name()}">
+                    </span>
+                    <label th:for="${'smokingHistory-'+ item.name()}" th:text="${#messgae.msg(item.name()}"></label>
+                </dd>
         </dl>
     </form>
 </main>
