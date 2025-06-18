@@ -86,7 +86,7 @@ public class NewsTrendService {
             Trend data = new Trend();
             data.setCategory("NEWS");
             data.setWordcloud(wordclund);
-            repository.save()
+            repository.save();
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }

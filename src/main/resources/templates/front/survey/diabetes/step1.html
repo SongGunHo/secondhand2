@@ -8,7 +8,37 @@
     <h1 th:test="${pageTitle}"></h1>
     <form name="frmStep" th:action="@{/survey/diabetes/step2}" method="post" th:objdect="${requestDiabetesSurvey}">
         <div class="error global" th:each="err: ${#fields.globalErrors}" ></div>
-
+        <dl>
+            <dt th:text="#{성별}"></dt>
+            <dd>
+                <span th:each="gen: ${genders}">
+                    <input type="radio" name="gender" th:value="${gen.name()}" th:field="*{gender}" th:id="${'gender-' + gen.name}">
+                    <label th:for="${'gender-' + gen.name}" th:text="#{messge.msg(gen.name(}"></label>
+                </span>
+                <div class="error" th:each="err :${#fields.errors('gender'}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{나이}"></dt>
+                <dd>
+                    <input type="number" name="age" th:field="*{age}" min="10" max="130">
+                    <div class="error" th:each="err :${#fields.errors('age'}" th:text="${err}"></div>
+                </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{고혈압 여부}"></dt>
+            <dd>
+                <span>
+                    <input type="radio" name="hypertension" value="true" th:field="*{hypertension}" id="hypertension-true">
+                    <label for="hypertension-true" th:text="#{있음}"></label>
+                </span>
+                <span>
+                    <input type="radio" name="hypertension" value="true" th:field="*{hypertension}" id="hypertension-false">
+                    <label for="hypertension-false" th:text="#{없음}"></label>
+                </span>
+                <div class="error" th:each="err :${#fields.errors('hypertension'}" th:text="${err}"></div>
+            </dd>
+        </dl>
     </form>
 </main>
 </html>
