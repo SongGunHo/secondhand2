@@ -3,10 +3,13 @@ package org.koreait.survey.diabetes.sevices;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+import org.koreait.global.constants.Gender;
 import org.koreait.member.entities.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Lazy;
+import org.survey.diabetes.constamts.SmokingHistory;
+import org.survey.diabetes.controllers.RequestDiabetesSurvey;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -29,9 +32,24 @@ public class DiabetesSurveyPredictServiceTest {
     @Test
     void test2(){
         //List<Number> item = List.of(1, 46.0, 0.0, 0.0, 3, 29.6, 5.8, 130);
-        List<Number> item = List.of(1, 41, 0, 0, 0,29.6, 8.2, 126);
-        boolean result = serviceTest.isDiabetes(item);
+//        List<Number> item = List.of(1, 41, 0, 0, 0,29.6, 8.2, 126);
+//        boolean result = serviceTest.isDiabetes(item);
+//        System.out.println(result);
+
+        RequestDiabetesSurvey form = new RequestDiabetesSurvey();
+        form.setGender(Gender.MALE);
+        form.setAge(41);
+        form.setHypertension(false);
+        form.setHeartDisease(false);
+        form.setSmokingHistory(SmokingHistory.EVER);
+        form.setHeight(178.5);
+        form.setWeight(120);
+        form.setHbA1c(8.2);
+        form.setBloodGlucoseLevel(126);
+
+        boolean result = serviceTest.isDiabetes(form);
         System.out.println(result);
+
     }
 
 }
