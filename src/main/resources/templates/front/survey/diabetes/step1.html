@@ -5,6 +5,7 @@
 
 
 <main layout:fragment="content">
-
+    <h1 th:test="${pageTitle}"></h1>
+    <form name="frmStep" th:action="@{/survey/diabetes/step2}" method="post"></form>
 </main>
 </html>
