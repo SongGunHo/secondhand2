@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{front/layouts/main}">
+    <main layout:fragment="content">
+        <h1 th:text="#{pageTitle}"></h1>
+
+        <form name="frmLogin" method="post" th:action="@{/memeber/login}" th:object="${requstLoing}">
+            <input type="hidden" name="redirectUrl" th:field="*{redirectUrl}">
+            <ul>
+                <li>
+                    <input type="text" name="email" th:field="*{email}" th:placeholder="#{이메일}">
+                    <div class="error" th:each="err : ${#fields.error('email')">
+
+                    </div>
+                </li>
+                <li>
+                    <input type="password" name="password" th:field="*{password}" th:placeholder="#{비밀 번호}">
+                    <div class="error" th:each="err : ${fields.error('password')}"></div>
+                </li>
+                <li>
+                    <div class="left">
+                        <input type="checkbox" name="autoLogin" th:field="*{autoLoing}" id="autoLogin" value="true">
+                        <label for="autoLogin" th:text="#{지동 로그인}"></label>
+                    </div>
+                    <div class="right">
+                        <a th:href="@{/member/findId}" th:text="#{아이디_비밀 번호_찾기}"></a>
+                    </div>
+                </li>
+
+            </ul>
+            <button type="submit" th:tetle="#{로그인}"></button>
+            <div class="error global" th:each="err : ${fields.globalErrors}" th:text="${err}"></div>
+            <a th:href="@{/member/login}" th:text="#{회원 가입}"></a>
+        </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </main>
+</html>
