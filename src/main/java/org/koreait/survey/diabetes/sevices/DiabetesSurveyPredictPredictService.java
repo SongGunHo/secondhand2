@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 import org.koreait.survey.diabetes.controllers.RequestDiabetesSurvey;
+import org.thymeleaf.preprocessor.IPreProcessor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -80,16 +81,18 @@ public class DiabetesSurveyPredictPredictService {
         item.add(form.getSmokingHistory().getNum());
 
         // bmi  지수
-        double height = form.getHeight()/100.0;
-        double weight = form.getWeight();
-        double bmi = Math.round((weight/ Math.pow(height, 2))* 100.0)/100.0;
+        double bmi = getBmi(form.getHeight(), form.getWeight());
         item.add(bmi);
         item.add(form.getHbA1c());// 당화혈 색소 수치
         item.add(form.getBloodGlucoseLevel());// 혈당 수치
         System.out.println(item);
         return isDiabetes(item);
     }
-
+    // bmi 지수 계산기
+    public double getBmi(double height, double weight){
+       height = height;
+        return Math.round((weight / Math.pow(height, 2.0)) * 100.0) / 100.0;
+    }
 
 
 }

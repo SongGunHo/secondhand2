@@ -8,6 +8,7 @@ import org.koreait.global.libs.Utils;
 import org.koreait.survey.diabetes.constamts.SmokingHistory;
 import org.koreait.survey.diabetes.sevices.DiabetesSurveyService;
 import org.koreait.survey.diabetes.validators.DiabetesSurveyValidator;
+import org.koreait.survey.enitties.DiabetesSurvey;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -72,10 +73,12 @@ public class DiabetesSurveyController {
             return utils.tpl("survey/diabetes/step2");
         }
         //  설문 결과밎 저장 처리
-        service.process(form);
+        DiabetesSurvey item =service.process(form);
         //처리 완료후 세션 값으로 더이상 변경 되지 않는다
         status.setComplete();
-        return "redirect:/survey/diabetes/result/설문 번호";
+        // 양식 데이터 초기화
+        model.addAttribute("requestDiabetesSurvey", RequestDiabetesSurvey);
+        return "redirect:/survey/diabetes/result/"+ item.getSeq();
     }
 
     /**
