@@ -38,3 +38,12 @@ file:
   upload:
     url: ${file.url}
     path: ${file.path}
+
+
+# 파이썬 설정
+python:
+  path:
+    base: ${python.base}
+    base2: ${python.base2}
+    trend: ${python.trend}
+    restaurant: ${python.restaurant}
