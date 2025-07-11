@@ -9,10 +9,8 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.web.servlet.LocaleResolver;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.fasterxml.jackson.databind.type.LogicalType.Collection;
 
@@ -89,7 +87,12 @@ public class Utils {
 
     public Map<String , List<String>>  getErrorMessage(Errors errors){
         // 필드벌 실페 메시지 - rejectvalu  카멘드 객체 검증 필드
-       Map<String,List<String>> message =errors.getFieldErrors().stream().collect(Conllectors.toMap(FieldError::getField , f-> getErrorMessage(f->f.getCodes)));
+       Map<String,List<String>> message =errors.getFieldErrors().stream().collect(Collectors.toMap(FieldError::getField, f -> getMessage(f.getCode()), (v1, v2) -> v2));
+
+       List<String> gMessage  = errors.getGlobalErrors().stream().flatMap(g-> getMessage(g.getCodes()).stream()).toList();
+       if(!gMessage.isEmpty()){
+           message.put("global", gMessage);
+       }
     }
 
 
