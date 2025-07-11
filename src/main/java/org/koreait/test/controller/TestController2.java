@@ -1,5 +1,6 @@
 package org.koreait.test.controller;
 
+import org.koreait.global.exceptions.BadRequestException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +16,7 @@ public class TestController2 {
         boolean result = false;
 
         if(!result){
-            return "확인";
+            return BadRequestException("확인");
         }
 
     }
