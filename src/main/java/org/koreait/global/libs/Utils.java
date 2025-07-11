@@ -3,6 +3,7 @@ package org.koreait.global.libs;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
@@ -13,6 +14,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.fasterxml.jackson.databind.type.LogicalType.Collection;
+import static java.util.stream.Collectors.toList;
 
 @Component
 @RequiredArgsConstructor
@@ -76,7 +78,19 @@ public class Utils {
         return messageSource.getMessage(code, null, locale);
     }
     public  List<String> getMessage(String[] codes){
-        return Arrays.stream(codes).map(this :: getMessage).toList();
+        ResourceBundleMessageSource ms = (ResourceBundleMessageSource) messageSource;
+        ms.setUseCodeAsDefaultMessage(false);
+        try {
+            return Arrays.stream(codes)
+                .map(c-> {
+                    try{
+                        return getMessage(c);
+                    }catch (Exception e ){}
+                    return "";
+                }).filter(s-> !s.isBlank()).toList();
+        }finally {
+            ms.setUseCodeAsDefaultMessage(true);
+        }
     }
 
     /**
@@ -87,12 +101,13 @@ public class Utils {
 
     public Map<String , List<String>>  getErrorMessage(Errors errors){
         // 필드벌 실페 메시지 - rejectvalu  카멘드 객체 검증 필드
-       Map<String,List<String>> message =errors.getFieldErrors().stream().collect(Collectors.toMap(FieldError::getField, f -> getMessage(f.getCode()), (v1, v2) -> v2));
+       Map<String,List<String>> message =errors.getFieldErrors().stream().collect(Collectors.toMap(FieldError::getField, f -> getMessage(f.getCodes()), (v1, v2) -> v2));
 
        List<String> gMessage  = errors.getGlobalErrors().stream().flatMap(g-> getMessage(g.getCodes()).stream()).toList();
        if(!gMessage.isEmpty()){
            message.put("global", gMessage);
        }
+       return message;
     }
 
 
