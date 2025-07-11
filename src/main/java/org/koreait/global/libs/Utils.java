@@ -5,9 +5,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.Errors;
 import org.springframework.web.servlet.LocaleResolver;
 
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
@@ -71,7 +74,18 @@ public class Utils {
         return messageSource.getMessage(code, null, locale);
     }
 
-    
+    /**
+     * 커맨드 객체 실패 머세지 처리 (rest)
+     * @param errors
+     * @return
+     */
+
+    public Map<String , List<String>>  getErrorMessage(Errors errors){
+        // 필드벌 실페 메시지 - rejectvalu  카멘드 객체 검증 필드
+       Map<String,List<String>> message =errors.getFieldErrors().stream().collect()
+    }
+
+
 
     public String getParam(String name) {
         return request.getParameter(name);
