@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+
+
+<main layout:fragment="content" th:object="#{item}">
+    <h1 th:test="${pageTitle}"></h1>
+    <div class="result-box" th:text="*{diabetes? #message.msg('diabetes.HIGH'): #message.msg('diabetes.Low')}">
+    </div>
+
+    <dl>
+        <dt th:text="#{성별}"></dt>
+        <dd th:text="*{message.msg(gender}"></dd>
+    </dl>
+    <dl>
+        <dt th:text="#{나이}"></dt>
+        <dt th:text="*{age}"></dt>
+    </dl>
+    <dl>
+        <dt th:text="#{고협일 여부}"></dt>
+        <dd th:text="*{hypertension? #messge.msg('있음'): #message.msg('없음)'}"></dd>
+    </dl>
+    <dl>
+        <dt th:text="#{심장 질환 여부}"></dt>
+        <dd th:text="*{heartDisease? #messge.msg('있음'): #message.msg('없음)'}"></dd>
+    </dl>
+    <dl>
+        <dt th:text="#{릅엽 여부}"></dt>
+        <dd th:text="*{#message.msg('smokingHistory.+'+smokingHistory)}"></dd>
+    </dl>
+    <dl>
+        <dt th:text="#{비만도}"></dt>
+        <dd>
+            <th:block th:text="#{키}"></th:block>
+            <th:block th:text="*{height}"></th:block>
+            <th:block th:text="#{몸무게}"></th:block>
+            <th:block th:text="*{weight}"></th:block>
+            BMI:<th:block th:text="*{bmi}"></th:block>
+        </dd>
+    </dl>
+    <dl>
+        <dt>
+            <th:block th:text="#{당화혈소 섹소 수치}"></th:block>
+            <th:block th:text="#{혈당 수치}"></th:block>
+        </dt>
+        <dd>
+            <th:block th:text="*{hbA1c}"></th:block>
+            <th:block th:text="*{bloodGlucoseLevel}"></th:block>
+        </dd>
+    </dl>
+    <div class="button-group">
+        <a th:href="@{/survey/diabetes/step1}" th:text="#{설문_다시하기}" class="btn"></a>
+        <a th:href="@{/mypage/survey/diabetes}" th:text="#{나의_설문목록}" class="btn"></a>
+    </div>
+</main>
+</html>
