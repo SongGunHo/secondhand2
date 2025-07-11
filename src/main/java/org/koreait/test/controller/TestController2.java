@@ -16,7 +16,7 @@ public class TestController2 {
         boolean result = false;
 
         if(!result){
-            return BadRequestException("확인");
+            throw new  BadRequestException("확인 하는 법 ");
         }
 
     }
