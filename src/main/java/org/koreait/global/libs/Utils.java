@@ -6,11 +6,15 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.web.servlet.LocaleResolver;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+import static com.fasterxml.jackson.databind.type.LogicalType.Collection;
 
 @Component
 @RequiredArgsConstructor
@@ -73,6 +77,9 @@ public class Utils {
 
         return messageSource.getMessage(code, null, locale);
     }
+    public  List<String> getMessage(String[] codes){
+        return Arrays.stream(codes).map(this :: getMessage).toList();
+    }
 
     /**
      * 커맨드 객체 실패 머세지 처리 (rest)
@@ -82,7 +89,7 @@ public class Utils {
 
     public Map<String , List<String>>  getErrorMessage(Errors errors){
         // 필드벌 실페 메시지 - rejectvalu  카멘드 객체 검증 필드
-       Map<String,List<String>> message =errors.getFieldErrors().stream().collect()
+       Map<String,List<String>> message =errors.getFieldErrors().stream().collect(Conllectors.toMap(FieldError::getField , f-> getErrorMessage(f->f.getCodes)));
     }
 
 
