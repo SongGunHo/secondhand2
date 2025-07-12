@@ -1,4 +1,4 @@
-package org.koreait.survey.enitties;
+package org.koreait.survey.diabetes.entities;
 
 import lombok.Data;
 import org.koreait.global.constants.Gender;

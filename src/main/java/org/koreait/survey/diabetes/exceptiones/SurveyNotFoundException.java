@@ -1,4 +1,4 @@
-package org.koreait.survey.exceptiones;
+package org.koreait.survey.diabetes.exceptiones;
 
 import org.koreait.global.exceptions.script.AlertBackException;
 import org.springframework.http.HttpStatus;

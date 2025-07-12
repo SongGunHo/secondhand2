@@ -1,13 +1,13 @@
-/*
 package org.koreait.survey.diabetes.sevices;
 
 import lombok.RequiredArgsConstructor;
-import org.koreait.global.configs.ModelMapper;
 import org.koreait.member.entities.Member;
 import org.koreait.member.libs.MemberUtil;
 import org.koreait.survey.diabetes.controllers.RequestDiabetesSurvey;
-import org.koreait.survey.enitties.DiabetesSurvey;
-import org.koreait.survey.repostoryes.DiabetesSurveyRepository;
+import org.koreait.survey.diabetes.sevices.DiabetesSurveyPredictPredictService;
+import org.koreait.survey.diabetes.entities.DiabetesSurvey;
+import org.koreait.survey.repository.DiabetesSurveyRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
@@ -15,39 +15,33 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class DiabetesSurveyService {
-    private DiabetesSurveyRepository repository;
-    private MemberUtil util;
-    private DiabetesSurveyPredictPredictService predictPredictService;
-    private ModelMapper mapper;
 
-    public void process(RequestDiabetesSurvey form){
-        */
-/**
-         *  1.  설문 딥변으로 단요 고위험군 예측 겱과 가지고 오기
-         * 2. 로그인 한 회원 정보 가지고 오기
-         * 3. dB 에 저장 처리
-         *
-         *//*
+    private final DiabetesSurveyPredictPredictService predictService;
+    private final DiabetesSurveyRepository repository;
+    private final MemberUtil memberUtil;
+    private final ModelMapper mapper;
 
-        boolean diabetes = predictPredictService.isDiabetes(form);
+    public DiabetesSurvey process(RequestDiabetesSurvey form) {
+        /**
+         * 1. 설문 답변으로 당뇨 고위험군 예측 결과 가져오기
+         * 2. 로그인한 회원 정보 가져오기
+         * 3. DB에 저장 처리
+         */
 
-        Member member = util.getMember();
-        double bmi = predictPredictService.getBmi(form.getHeight(), form.getWeight());
+        boolean diabetes = predictService.isDiabetes(form);
+        Member member = memberUtil.getMember();
+        double bmi = predictService.getBmi(form.getHeight(), form.getWeight());
+
         DiabetesSurvey item = mapper.map(form, DiabetesSurvey.class);
+
         item.setDiabetes(diabetes);
         item.setBmi(bmi);
-        if(util.isLogin()){
-            item.setMemberSeq(util.getMember().getSeq());
+        if (memberUtil.isLogin()) {
+            item.setMemberSeq(memberUtil.getMember().getSeq());
         }
-        item.setMember(member);
 
         repository.save(item);
-        return repository.findAllById(item.getSeq()).orElse(null);
 
-
-
-
+        return repository.findById(item.getSeq()).orElse(null);
     }
-
 }
-*/
