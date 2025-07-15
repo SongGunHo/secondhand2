@@ -69,7 +69,7 @@ public class DiabetesSurveyPredictPredictService {
 
     public boolean isDiabetes(List<Number> items){
         List<Integer> result = process(List.of(items));
-            return result.isEmpty() &&  result.getFirst() == 1;
+            return result.isEmpty() && result.getFirst() == 1;
     }
 
     public boolean isDiabetes(RequestDiabetesSurvey form){

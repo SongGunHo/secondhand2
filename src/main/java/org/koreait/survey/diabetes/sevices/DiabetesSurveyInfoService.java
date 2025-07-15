@@ -43,7 +43,7 @@ public class DiabetesSurveyInfoService {
         try {
             String sql = "SELECT s.*, m.email, m.name, m.mobile FROM SURVEY_DIABETES s " +
                     " LEFT JOIN MEMBER m ON s.memberSeq = m.seq WHERE s.seq = ?";
-            DiabetesSurvey item = jdbcTemplate.queryForObject(sql, this::mapper, seq);
+            DiabetesSurvey item = jdbcTemplate.queryForObject(sql, this::mapper, seq); // 데이터 한개의 메서드
 
             Member member = memberUtil.getMember(); // 로그인한 회원 정보
             if (!memberUtil.isLogin() || (!memberUtil.isAdmin() && !member.getSeq().equals(item.getMemberSeq()))) { // 로그인 상태가 아니거나, 관리자가 아닌 회원 로그인일때 설문지 작성 회원과 일치 하지 않다면
@@ -89,6 +89,7 @@ public class DiabetesSurveyInfoService {
 
         return new ListData<>(items, pagination);
     }
+
 
     private DiabetesSurvey mapper(ResultSet rs, int i) throws SQLException {
         DiabetesSurvey item = new DiabetesSurvey();
