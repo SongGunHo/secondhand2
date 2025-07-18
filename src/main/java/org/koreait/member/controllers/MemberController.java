@@ -6,6 +6,7 @@ import org.koreait.global.annotations.ApplyCommonController;
 import org.koreait.global.libs.Utils;
 import org.koreait.member.services.JoinService;
 import org.koreait.member.social.constants.SocialType;
+import org.koreait.member.social.sevices.KakaoLoginService;
 import org.koreait.member.validators.JoinValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,7 @@ public class MemberController {
     private final Utils utils;
     private final JoinValidator joinValidator;
     private final JoinService joinService;
+    private final KakaoLoginService service;
 
     @ModelAttribute("addCss")
     public List<String> addCss() {
@@ -39,7 +41,7 @@ public class MemberController {
 
     // 회원가입 양식
     @GetMapping("/join")
-    public String join(@ModelAttribute RequestJoin form, Model model, @SessionAttribute(value = "socialType", required = false) SocialType type, @SessionAttribute(value = "SocialToken", required = false) SocialToken token) {
+    public String join(@ModelAttribute RequestJoin form, Model model, @SessionAttribute(value = "socialType", required = false) SocialType type, @SessionAttribute(value = "SocialToken", required = false) SocialType token) {
         commonProcess("join", model);
         form.getSocialType(type);
         form.setSocialToken(token);
@@ -83,6 +85,9 @@ public class MemberController {
             globalErrors.forEach(errors::reject);
         }
         /* 검증 실패 처리 E */
+
+        /* 소셜 로그인  url*/
+        model.addAttribute("kakaoLoginUrl", service.getLoginUrl(form.getRedirectUrl()));
 
         return utils.tpl("member/login");
     }

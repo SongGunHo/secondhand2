@@ -29,13 +29,19 @@ public class JoinValidator implements Validator, PasswordValidator, MobileValida
             return;
         }
 
+        RequestJoin form = (RequestJoin) target;
+        //  소셜 회원 가입이 아닌 경우는 비밀 번호 비밀 번호 확인 목록
+
         /**
          * 1. 이메일 중복 여부
          * 2. 비밀번호 복잡성
          * 3. 비밀번호 확인
          * 4. 휴대폰번호 형식 검증
          */
-        RequestJoin form = (RequestJoin) target;
+        if(!form.isSocial()){
+            String password = form.getPassword();
+            String confirmPassword = form.getConfirmPassword();
+        }
         String password = form.getPassword();
         String confirmPassword = form.getConfirmPassword();
         String mobile = form.getMobile();

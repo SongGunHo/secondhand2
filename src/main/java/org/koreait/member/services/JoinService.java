@@ -38,7 +38,8 @@ public class JoinService {
             mobile = mobile.replaceAll("\\D", "");
         }
 
-        Member member = modelMapper.map(form, Member.class);
+        String password  = form.getPassword();
+        Member member = StringUtils.hasText(password)? encoder.encode(form.getPassword()): null;
         member.setPassword(hash);
         member.setMobile(mobile);
         member.setCredentialChangedAt(LocalDateTime.now());

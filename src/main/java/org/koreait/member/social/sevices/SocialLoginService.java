@@ -5,7 +5,7 @@ public interface SocialLoginService {
     boolean login(String token);
     boolean exists(String token);
     String getLoginUrl();
-    String getRediectUrl();
+    String getRedirectUrl();
 
 
 
