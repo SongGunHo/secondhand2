@@ -1,21 +1,22 @@
 package org.koreait.survey.enitties;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Table;
 import lombok.Data;
 import org.koreait.global.constants.Gender;
 import org.koreait.global.entities.BaseEntity;
 import org.koreait.survey.diabetes.constamts.SmokingHistory;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+//import org.springframework.data.relational.core.mapping.Column;
+//import org.springframework.data.relational.core.mapping.Table;
 
 import java.lang.reflect.Member;
 
 @Data
-@Table("SURVEY_DIABETES")
+@Table(schema = "SURVEY_DIABETES")
 public class DiabetesSurvey  extends BaseEntity {
     @Id
-    private Long seq;
 
     @Column("memberSeq")
     private Long memberSeq;

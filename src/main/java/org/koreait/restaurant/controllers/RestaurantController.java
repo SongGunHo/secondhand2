@@ -19,8 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequiredArgsConstructor
 @ApplyCommonController
+@RequiredArgsConstructor
 @RequestMapping("/restaurant")
 public class RestaurantController {
 

@@ -1,5 +1,7 @@
 package org.koreait.survey.diabetes.sevices;
 
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.koreait.global.constants.Gender;
@@ -10,12 +12,14 @@ import org.koreait.global.search.Pagination;
 import org.koreait.member.entities.Member;
 import org.koreait.member.libs.MemberUtil;
 import org.koreait.survey.diabetes.constamts.SmokingHistory;
+import org.koreait.survey.diabetes.repositories.DiabetesSurveyRepository;
 import org.koreait.survey.enitties.DiabetesSurvey;
 import org.koreait.survey.exceptiones.SurveyNotFoundException;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,12 +28,14 @@ import java.util.List;
 @Lazy
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class DiabetesSurveyInfoService {
 
     private final HttpServletRequest request;
-    private final JdbcTemplate jdbcTemplate;
     private final MemberUtil memberUtil;
     private final DiabetesSurvey survey;
+    private final DiabetesSurveyRepository repository;
+    private final JPAQueryFactory query;
 
     /**
      * 설문지 한개 조회
@@ -39,22 +45,19 @@ public class DiabetesSurveyInfoService {
      * @param seq
      * @return
      */
-    public DiabetesSurvey get(Long seq) {
-        try {
-            String sql = "SELECT s.*, m.email, m.name, m.mobile FROM SURVEY_DIABETES s " +
-                    " LEFT JOIN MEMBER m ON s.memberSeq = m.seq WHERE s.seq = ?";
-            DiabetesSurvey item = jdbcTemplate.queryForObject(sql, this::mapper, seq); // 데이터 한개의 메서드
+    public DiabetesSurvey get(Long seq){
 
-            Member member = memberUtil.getMember(); // 로그인한 회원 정보
-            if (!memberUtil.isLogin() || (!memberUtil.isAdmin() && !member.getSeq().equals(item.getMemberSeq()))) { // 로그인 상태가 아니거나, 관리자가 아닌 회원 로그인일때 설문지 작성 회원과 일치 하지 않다면
+            DiabetesSurvey item = repository.findById(seq).orElseThrow(SurveyNotFoundException :: new);
+
+            Member member = item.getMember();
+            Member loggedMember  = memberUtil.getMember(); // 로그인한 회원 정보
+            if (!memberUtil.isLogin() || (!memberUtil.isAdmin() && !loggedMember.getSeq().equals(member.getSeq()))) { // 로그인 상태가 아니거나, 관리자가 아닌 회원 로그인일때 설문지 작성 회원과 일치 하지 않다면
                 throw new UnAuthorizedException();
             }
 
 
             return item;
-        } catch (DataAccessException e) { // 조회가 안된 경우
-            throw new SurveyNotFoundException();
-        }
+
     }
 
     /**
@@ -74,17 +77,15 @@ public class DiabetesSurveyInfoService {
         limit = limit < 1 ? 10 : limit;
         int offset = (page - 1) * limit; // 레코드 시작 번호
 
-        Member member = memberUtil.getMember(); // 현재 로그인한 회원 정보
+        Member loggedMember = memberUtil.getMember(); // 현재 로그인한 회원 정보
+        QDiabeteSurvey diabeteSurvey = QDiabetsSurvey.member;
+        BooleanBuilder andBuilder = new BooleanBuilder();
+        andBuilder.and(diabeteSurvey.member.eq(loggedMember));
 
-        String sql = "SELECT s.*, m.email, m.name, m.mobile FROM SURVEY_DIABETES s " +
-                " LEFT JOIN MEMBER m ON s.memberSeq = m.seq WHERE memberSeq = ? " +
-                " ORDER BY s.createdAt DESC LIMIT ?, ?";
+        List<DiabetesSurvey> items = query.selectFrom(diabeteSurvey)
+                .where(andBuilder).orderBy(diabeteSurvey.createdAt.desc()).offset(offset).limit(limit).fetch();
+        long total = repository.count(page, (int)total, 10, limit, request);
 
-        List<org.koreait.survey.enitties.DiabetesSurvey> items = jdbcTemplate.query(sql, this::mapper, member.getSeq(), offset, limit);
-
-        int total = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM SURVEY_DIABETES WHERE memberSeq = ?", int.class, member.getSeq());
-
-        // Pagination(int page, int total, int range, int limit, HttpServletRequest request)
         Pagination pagination = new Pagination(page, total, 10, limit, request);
 
         return new ListData<>(items, pagination);
