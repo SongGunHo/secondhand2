@@ -30,7 +30,7 @@ public class DiabetesSurveyService {
  *
  */
         boolean diabetes = predictPredictService.isDiabetes(form);
-//        Member member = util.getMember();
+        Member member = util.getMember();
         double bmi = predictService.getBmi(form.getHeight(), form.getWeight());
 
         DiabetesSurvey item = mapper.map(form, DiabetesSurvey.class);
@@ -38,10 +38,10 @@ public class DiabetesSurveyService {
         item.setDiabetes(diabetes);
         item.setBmi(bmi);
         if (util.isLogin()) {
-            item.setMemberSeq(util.getMember().getSeq());
+          item.setMember(member);
         }
 
-        repository.save(item);
+        repository.savAndFlush(item);
 
         return repository.findById(item.getSeq()).orElse(null);
     }}
