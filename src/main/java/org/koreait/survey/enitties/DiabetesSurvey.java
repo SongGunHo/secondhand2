@@ -17,7 +17,6 @@ import java.lang.reflect.Member;
 @Table(schema = "SURVEY_DIABETES")
 public class DiabetesSurvey  extends BaseEntity {
     @Id
-
     @Column("memberSeq")
     private Long memberSeq;
     private Gender gender;

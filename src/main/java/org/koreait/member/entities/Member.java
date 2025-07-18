@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.koreait.global.entities.BaseEntity;
 import org.koreait.member.constants.Authority;
-import org.koreait.member.social.constants.SociaType;
+import org.koreait.member.social.constants.SocialType;
 
 import java.time.LocalDateTime;
 
@@ -37,7 +37,7 @@ public class Member extends BaseEntity {
     private Authority authority = Authority.MEMBER;
 
     @Enumerated(EnumType.STRING)
-    private SociaType scoialType;
+    private SocialType scoialType;
 
     @Column(length = 65)
     private String socialToken;

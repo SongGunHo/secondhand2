@@ -1,5 +1,6 @@
 package org.koreait.member.services;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.koreait.member.controllers.RequestJoin;
 import org.koreait.member.entities.Member;
@@ -21,6 +22,7 @@ public class JoinService {
     private final ModelMapper modelMapper;
     private final PasswordEncoder encoder;
     private final MemberRepository repository;
+    private final HttpSession session;
 
     public void process(RequestJoin form) {
         /**
@@ -44,6 +46,8 @@ public class JoinService {
         member.setSocialToken(form.getSocialToken());
 
         repository.saveAndFlush(member);
-
+        //  소셜 로그인 관련 세션값 삭제
+        session.removeAttribute("socialType");
+        session.removeAttribute("socialToken");
     }
 }

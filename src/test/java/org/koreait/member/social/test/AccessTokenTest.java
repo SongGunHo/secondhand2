@@ -50,7 +50,8 @@ public class AccessTokenTest {
         request = new HttpEntity<>(headers);
         
         Map resBody = res.getBody();
-        long id = (Long) resBody
+        long id = (Long) resBody.get("id");
+        System.out.println(id);
 
 
 

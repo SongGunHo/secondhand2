@@ -4,8 +4,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.koreait.global.annotations.ApplyCommonController;
 import org.koreait.global.libs.Utils;
-import org.koreait.member.libs.MemberUtil;
 import org.koreait.member.services.JoinService;
+import org.koreait.member.social.constants.SocialType;
 import org.koreait.member.validators.JoinValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +26,6 @@ public class MemberController {
     private final Utils utils;
     private final JoinValidator joinValidator;
     private final JoinService joinService;
-    private final MemberUtil memberUtil;
 
     @ModelAttribute("addCss")
     public List<String> addCss() {
@@ -40,8 +39,10 @@ public class MemberController {
 
     // 회원가입 양식
     @GetMapping("/join")
-    public String join(@ModelAttribute RequestJoin form, Model model) {
+    public String join(@ModelAttribute RequestJoin form, Model model, @SessionAttribute(value = "socialType", required = false) SocialType type, @SessionAttribute(value = "SocialToken", required = false) SocialToken token) {
         commonProcess("join", model);
+        form.getSocialType(type);
+        form.setSocialToken(token);
 
         return utils.tpl("member/join");
     }

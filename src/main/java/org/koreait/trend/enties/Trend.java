@@ -1,13 +1,14 @@
 package org.koreait.trend.enties;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Table;
 import lombok.Data;
 import org.koreait.global.entities.BaseEntity;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
+
 
 @Data
-@Table("TREND")
+//@Table("trend")
 public class Trend extends BaseEntity {
 
     @Id
