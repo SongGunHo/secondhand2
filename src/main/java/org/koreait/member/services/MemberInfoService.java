@@ -81,7 +81,7 @@ public class MemberInfoService implements UserDetailsService {
             skey = skey.trim();
             StringExpression fields = null;
             if (sopt.equals("NAME")) {
-                fields = member.;
+                fields = member.name;
             } else if (sopt.equals("EMAIL")) {
                 fields = member.email;
             } else if (sopt.equals("MOBILE")) {
@@ -95,7 +95,7 @@ public class MemberInfoService implements UserDetailsService {
 
         // 권한 조건 검색 S
         List<Authority> authorities = search.getAuthority();
-        if (!authorities !=null && !authorities.isEmpty()) {
+        if (authorities != null && !authorities.isEmpty()) {
             andBuilder.and(member.authority.in(authorities));
         }
         // 권한 조건 검색 E

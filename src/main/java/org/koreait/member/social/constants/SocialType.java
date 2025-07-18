@@ -1,8 +1,10 @@
 package org.koreait.member.social.constants;
 
-public enum SociaType {
-
+public enum SocialType {
     NONE,
-    KAKAP,
     NAVER,
+    KAKAO,
+
+
+
 }

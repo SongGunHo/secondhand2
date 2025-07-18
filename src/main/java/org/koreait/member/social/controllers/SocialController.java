@@ -1,0 +1,26 @@
+package org.koreait.member.social.controllers;
+
+import lombok.RequiredArgsConstructor;
+import org.koreait.global.annotations.ApplyCommonController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@ApplyCommonController
+@RequiredArgsConstructor // 의존성 주입
+@RequestMapping("/member/social")
+public class SocialController {
+
+    @GetMapping("/")
+    public String callback(){
+
+    }
+
+
+
+
+
+
+
+}
