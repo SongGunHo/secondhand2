@@ -1,9 +1,9 @@
 package org.koreait.trend.enties;
 
+import jakarta.persistence.Column;
 import lombok.Data;
 import org.koreait.global.entities.BaseEntity;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Data
@@ -16,18 +16,4 @@ public class Trend extends BaseEntity {
     @Column("wordcloud")
     private String wordcloud;
     private String keywords;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

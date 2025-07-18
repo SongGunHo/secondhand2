@@ -6,6 +6,7 @@ import org.koreait.global.configs.ModelMapper;
 import org.koreait.member.entities.Member;
 import org.koreait.member.libs.MemberUtil;
 import org.koreait.survey.diabetes.controllers.RequestDiabetesSurvey;
+import org.koreait.survey.diabetes.services.DiabetesSurveyPredictService;
 import org.koreait.survey.enitties.DiabetesSurvey;
 import org.koreait.survey.repostoryes.DiabetesSurveyRepository;
 import org.springframework.context.annotation.Lazy;
@@ -19,8 +20,7 @@ public class DiabetesSurveyService {
     private MemberUtil util;
     private DiabetesSurveyPredictPredictService predictPredictService;
     private ModelMapper mapper;
-    private PredictService predictService;
-
+    private final DiabetesSurveyPredictService predictService;
     public void process(RequestDiabetesSurvey form) {
 
 /**
