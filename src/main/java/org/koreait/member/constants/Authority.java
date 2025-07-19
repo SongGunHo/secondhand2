@@ -1,6 +1,6 @@
 package org.koreait.member.constants;
 
 public enum Authority {
-    MEMBER,
-    ADMIN
+    MEMBER, // 일반회원
+    ADMIN // 관리자
 }
