@@ -11,6 +11,7 @@ public enum SmokingHistory {
     private final int num;
 
     SmokingHistory(int num) {
+
         this.num = num;
     }
 
