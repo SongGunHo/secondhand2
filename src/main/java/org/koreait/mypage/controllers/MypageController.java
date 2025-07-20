@@ -16,6 +16,7 @@ public class MypageController {
 
     @GetMapping
     public String index() {
-        return utils.tpl("mypage/index");
+        return utils.tpl("mypage/index"
+        );
     }
 }
