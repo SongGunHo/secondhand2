@@ -41,4 +41,26 @@
             <a th:href="@{/member/join}" th:text="#{회원가입}"></a>
         </form>
     </main>
+<script th:lnine="javascript">
+    function kakao_login(){
+
+
+    $.ajax({
+        url: "member/login ",
+        type: post,
+        async: false
+        dataType: test,
+        success: function(r){
+
+            local.hef= r;
+}
+})
+
+
+
+
+    }
+
+
+</script>
 </html>

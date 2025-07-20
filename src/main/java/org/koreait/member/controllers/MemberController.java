@@ -8,6 +8,7 @@ import org.koreait.member.services.JoinService;
 import org.koreait.member.social.constants.SocialType;
 import org.koreait.member.social.services.KakaoLoginService;
 import org.koreait.member.validators.JoinValidator;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -161,4 +162,23 @@ public class MemberController {
 //    public void test() {
 //        System.out.printf("로그인:%s, 관리자여부:%s, 회원정보:%s%n", memberUtil.isLogin(), memberUtil.isAdmin(), memberUtil.getMember());
 //    }
+
+//
+//   @GetMapping
+//    public String get ()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
