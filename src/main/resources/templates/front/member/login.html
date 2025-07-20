@@ -4,7 +4,7 @@
     layout:decorate="~{front/layouts/main}">
     <main layout:fragment="content">
         <h1 th:text="${pageTitle}"></h1>
-        <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
         <form name="frmLogin" method="post" th:action="@{/member/login}" autocomplete="off" th:object="${requestLogin}">
             <input type="hidden" name="redirectUrl" th:field="*{redirectUrl}">
             <ul>
@@ -41,26 +41,5 @@
             <a th:href="@{/member/join}" th:text="#{회원가입}"></a>
         </form>
     </main>
-<script th:lnine="javascript">
-    function kakao_login(){
 
-
-    $.ajax({
-        url: "member/login ",
-        type: post,
-        async: false
-        dataType: test,
-        success: function(r){
-
-            local.hef= r;
-}
-})
-
-
-
-
-    }
-
-
-</script>
 </html>
