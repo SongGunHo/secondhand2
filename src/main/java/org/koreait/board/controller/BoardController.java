@@ -43,5 +43,13 @@ public class BoardController {
     public String delete(@PathVariable("seq") String seq, Model model){
         return "redirect:/board/list";
     }
+
+    private void commonProcess(String bid ,String mode , Model model){
+
+    }
+    private void commonProcess1(Long seq ,String mode , Model model){
+
+    }
+
 }
 
