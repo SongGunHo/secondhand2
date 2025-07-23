@@ -23,7 +23,24 @@
         </table>
         <button type="submit" class="submit-btn">검색 하기</button>
     </form>
-    <form action=""></form>
+    <h2>게시판 목록</h2>
+    <form name="frmList" method="post" th:action="@{admin/board/process}" target="ifrmProcess" >
+        <input type="hidden" name="_method" value="PATCH">
+        <table class="table-rows">
+            <tr>
+                <th>
+                    <input type="checkbox" class="check-all" data-target-name="chk" id="check-all">
+                    <label for="check-all" class="standalone"></label>
+                </th>
+                <th width="180">게사판 id</th>
+                <th>게시판 이름</th>
+                <th width="350"></th>
+            </tr>
+            <tbody>
+                <tr th:if="${items != null &&}"
+            </tbody>
+        </table>
+    </form>
     
 </section>
 </html>
