@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layouts/main}">
+
+<section layout:fragment="content">
+    <h1 th:text="${pageTitle}"></h1>
+    <form name="frmSeach" th:action="@{/admin/board}" th:object="${commonSearch}">
+        <table class="table-cols">
+            <tr>
+                <th>카워드 검색</th>
+                <td>
+                    <div class="flex">
+                        <section name="sopt" th:field="*{sopt}" class="w180">
+                            <option value="ALL">통합 검색</option>
+                            <option value="BID">게시판 id</option>
+                            <option value="NAME">게시판 이름</option>
+                        </section>
+                        <input type="text" name="skey" th:field="*{skey}" placeholder="검색할 키워드 ">
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <button type="submit" class="submit-btn">검색 하기</button>
+    </form>
+    <form action=""></form>
+    
+</section>
+</html>
